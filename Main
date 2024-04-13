@@ -1,0 +1,23 @@
+import java.util.Date;
+
+public class Main
+{
+
+    public static void main(String[] args)
+    {
+        WebSearch webSearch = new WebSearch();
+        webSearch.addPage(new UnivWebPage("http://universityA.com", "University A", new Date(), new Date(), "Public", 15000, 1950));
+        webSearch.addPage(new UnivWebPage("http://universityB.com", "University B", new Date(), new Date(), "Private", 10000, 1975));
+
+        System.out.println("Universities founded after 1960:");
+        for (UnivWebPage page : webSearch.foundedAfter(1960)) {
+            System.out.println(page.getTitle() + " - " + page.getYearFounded());
+        }
+
+        System.out.println("\nPrivate universities:");
+        for (UnivWebPage page
+                     : webSearch.filter(p -> "Private".equals(p.getType()))) {
+            System.out.println(page.getTitle() + " - " + page.getType());
+        }
+    }
+}
